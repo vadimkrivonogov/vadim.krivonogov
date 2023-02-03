@@ -23,4 +23,6 @@ while True:
                 print("Esimene sümbol ei ole õige")
             else: 
                 print("Esimine sümbol on õige")
+            y=ik_list=()
+            
             
