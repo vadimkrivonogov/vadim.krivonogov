@@ -11,61 +11,57 @@ list.sort(reverse=True)
 print(list)
 
 #isikukood
-
-ikoodid = []
+isikukood = []
 arvud = []
+isikuoodid = []
+while True:
+    isikukood = input("Kirjutage teie isikukood: ")
+    n = len(isikukood)
+    if n == 11 and isikukood.isdigit():
+        arvud.append(isikukood)
+        isikukod_list = list(isikukood)
+        s1 = int(isikukod_list[0])
+        print("Esimene number on", isikukod_list[0])
+        if s1 in [1, 2, 3, 4, 5, 6]:
+            print("isikukood sobib")
+            arvud.append(isikukood)
+            break
+        else:
+            print("isikukoodis on viga")
+    else:
+        print("isikukoodis lubamatud väärtused või liiga vähe sümboleid")
+        break
 
-# попытки
-count = 0
+    y = (isikukod_list[1] + isikukod_list[2])  # year
+    m = (isikukod_list[3] + isikukod_list[4])  # month
+    d = int(isikukod_list[5] + isikukod_list[6])  # day
+    if (int(m) < 1 or int(m) > 13) and (int(d) < 1 or int(d) > 31):
+        print("Sünnipäev ei saa luua")
+        arvud.append(isikukood)
+        break
+    else:
+        if s1 == 1 or s1 == 2:
+            yy = "18"
+        elif s1 == 3 or s1 == 4:
+            yy = "19"
+        else:
+            yy = "20"
+        espäev = str(d) + "." + str(m) + "." + yy + y  # pole 18..,19..,20..
+        print(f"Sünnipäev on {espäev}")
+        print("Kontroll pole")
+        if s1 in [1, 3, 5]:
+            sugu = ("Mees")
+        if s1 in [2, 4, 6]:
+            sugu = ("Naine")
+        a1 = int(isikukood[0]) * 1
+        b1 = int(isikukood[1]) * 2
+        b2 = int(isikukood[2]) * 3
+        b3 = int(isikukood[3]) * 4
+        b4 = int(isikukood[4]) * 5
+        b5 = int(isikukood[5]) * 6
+        b6 = int(isikukood[6]) * 7
+        b7 = int(isikukood[7]) * 8
+        b8 = int(isikukood[8]) * 9
+        b9 = int(isikukood[9]) * 1
 
-while count < 4:
-  personal_code = input("Введи свой код!: ")
-  
-  # проверка длины
-  if len(personal_code) != 11:
-    print("Неправльная длина, должно быть 11.")
-    arvud.append(personal_code)
-    count += 1
-    continue
-  
-  # Проверить первую цифрку
-  if personal_code[0] not in "123456":
-    print("Неправильная первая цифра, какой твой пол??")
-    arvud.append(personal_code)
-    count += 1
-    continue
-  
-  # вычислить до с кода
-  day = personal_code[5:7]
-  month = personal_code[3:5]
-  year = personal_code[1:3]
-  
-  # проверить день рождения
-  try:
-    datetime.datetime.strptime(day + "-" + month + "-" + year, '%d-%m-%y')
-  except ValueError:
-    print("Ты родился? Неправльное ДР.")
-    arvud.append(personal_code)
-    count += 1
-    continue
-  
-  # 1
-  ikoodid.append(personal_code)
-  
-  # 2
-  gender = "male" if personal_code[0] in "135" else "female"
-  dob = day + "/" + month + "/19" + year
-  place_of_birth = "Idavir Keshaigla (Kohtla-Järve, endine Jõhvi)"
-  print(f"This is a {gender}, his/her birthday is {dob} and place of birth is {place_of_birth}.")
-  
-  count += 1
-
-#3
-arvud.sort()
-print("List of incorrect codes:", arvud)
-
-# 4
-ikoodid_women = [code for code in ikoodid if code[0] in "246"]
-ikoodid_men = [code for code in ikoodid if code[0] in "135"]
-print("List of correct codes for women:", ikoodid_women)
-print("List of correct codes for men:", ikoodid_men)
+        s11 = b1 + a1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 +
