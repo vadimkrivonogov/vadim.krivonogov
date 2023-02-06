@@ -11,57 +11,47 @@ list.sort(reverse=True)
 print(list)
 
 #isikukood
-isikukood = []
 arvud = []
-isikuoodid = []
 while True:
     isikukood = input("Kirjutage teie isikukood: ")
     n = len(isikukood)
-    if n == 11 and isikukood.isdigit():
-        arvud.append(isikukood)
-        isikukod_list = list(isikukood)
-        s1 = int(isikukod_list[0])
-        print("Esimene number on", isikukod_list[0])
-        if s1 in [1, 2, 3, 4, 5, 6]:
-            print("isikukood sobib")
-            arvud.append(isikukood)
-            break
-        else:
-            print("isikukoodis on viga")
-    else:
-        print("isikukoodis lubamatud väärtused või liiga vähe sümboleid")
-        break
+    if n != 11 or not isikukood.isdigit():
+        print("Isikukood peab olema 11-kohaline ja ainult numbritega.")
+        continue
 
-    y = (isikukod_list[1] + isikukod_list[2])  # year
-    m = (isikukod_list[3] + isikukod_list[4])  # month
-    d = int(isikukod_list[5] + isikukod_list[6])  # day
-    if (int(m) < 1 or int(m) > 13) and (int(d) < 1 or int(d) > 31):
-        print("Sünnipäev ei saa luua")
-        arvud.append(isikukood)
-        break
+    year = int(isikukood[1:3])
+    month = int(isikukood[3:5])
+    day = int(isikukood[5:7])
+    if not (1 <= month <= 12) or not (1 <= day <= 31):
+        print("Sünnipäev ei saa luua.")
+        continue
+   
+    century = 18 if int(isikukood[0]) in [1, 2] else 19 if int(isikukood[0]) in [3, 4] else 20
+    birthdate = f"{day}.{month}.{century}{year}"
+    print(f"Sünnipäev on {birthdate}")
+   
+    gender = "Mees" if int(isikukood[0]) in [1, 3, 5] else "Naine"
+    print(f"Sugu on {gender}")
+   
+    hospital_id = int(isikukood[7:10])
+    if 1 <= hospital_id <= 10:
+        hospital = "Kure Saare Haigla"
+    elif 11 <= hospital_id <= 19:
+        hospital = "Tartu Ülikooli Naistekliinik"
+    elif 20 <= hospital_id <= 220:
+        hospital = "Ida-Tallinna Keskhaigla, Pelgulinna sünnitusmaja, Hiiumaa, Keila, Rapla haigla, Loksa haigla"
+    elif 221 <= hospital_id <= 270:
+        hospital = "Ida-Viru Keskhaigla (Kohtla-Järve, endine Jõhvi)"
+    elif 271 <= hospital_id <= 310:
+        hospital = "Maarjamõisa kliinikum (Tartu)"
     else:
-        if s1 == 1 or s1 == 2:
-            yy = "18"
-        elif s1 == 3 or s1 == 4:
-            yy = "19"
-        else:
-            yy = "20"
-        espäev = str(d) + "." + str(m) + "." + yy + y  # pole 18..,19..,20..
-        print(f"Sünnipäev on {espäev}")
-        print("Kontroll pole")
-        if s1 in [1, 3, 5]:
-            sugu = ("Mees")
-        if s1 in [2, 4, 6]:
-            sugu = ("Naine")
-        a1 = int(isikukood[0]) * 1
-        b1 = int(isikukood[1]) * 2
-        b2 = int(isikukood[2]) * 3
-        b3 = int(isikukood[3]) * 4
-        b4 = int(isikukood[4]) * 5
-        b5 = int(isikukood[5]) * 6
-        b6 = int(isikukood[6]) * 7
-        b7 = int(isikukood[7]) * 8
-        b8 = int(isikukood[8]) * 9
-        b9 = int(isikukood[9]) * 1
+        hospital = "Teadmata"
+    print(f"Haigla on {hospital}")
 
-        s11 = b1 + a1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 +
+    control_sum = sum([int(c) * (2 if i % 2 == 0 else 1) for i, c in enumerate(isikukood[:9])]) % 11
+    if control_sum != int(isikukood[9]):
+        print("Isikukood ei ole korrektne.")
+        continue
+   
+    arvud.append(isikukood)
+    break 
